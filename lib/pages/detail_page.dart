@@ -162,46 +162,21 @@ class DetailPage extends StatelessWidget {
                       SizedBox(
                         height: 88,
                         child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            SizedBox(
-                              width: edge24,
-                            ),
-                            Image.asset(
-                              'assets/images/detail_photo1.png',
-                              width: 110,
-                              height: 88,
-                              fit: BoxFit.cover,
-                            ),
-                            const SizedBox(
-                              width: 18,
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.asset(
-                                'assets/images/detail_photo2.png',
-                                width: 110,
-                                height: 88,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 18,
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.asset(
-                                'assets/images/detail_photo3.png',
-                                width: 110,
-                                height: 88,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(
-                              width: edge24,
-                            ),
-                          ],
-                        ),
+                            scrollDirection: Axis.horizontal,
+                            children: space.photos!.map((imgUrl) {
+                              return Container(
+                                margin: EdgeInsets.only(left: edge24),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Image.network(
+                                    imgUrl,
+                                    width: 110,
+                                    height: 88,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            }).toList()),
                       ),
                       const SizedBox(
                         height: 30,
@@ -222,14 +197,12 @@ class DetailPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Jln. Kappan Sukses No. 20\nPalembang',
+                              '${space.address}\n${space.city}',
                               style: greyLightTextStyle,
                             ),
                             InkWell(
                               onTap: () {
-                                _launchURL(
-                                    // 'https://goo.gl/maps/56WKfqmwVJSuPAzW7'
-                                    'sadasdasdas');
+                                _launchURL(space.mapUrl);
                               },
                               child: Image.asset(
                                 'assets/images/btn_map.png',
@@ -246,7 +219,7 @@ class DetailPage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: edge24),
                         child: ElevatedButton(
                           onPressed: () {
-                            _launchURL('tel://+6281329824698');
+                            _launchURL('tel://+${space.phone}');
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
