@@ -1,6 +1,7 @@
 import 'package:cozy_bwa/pages/error_page.dart';
 import 'package:cozy_bwa/theme.dart';
 import 'package:cozy_bwa/widgets/main_facility_item.dart';
+import 'package:cozy_bwa/widgets/rating_item.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -86,29 +87,19 @@ class DetailPage extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: [
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 20,
-                                ),
-                                Image.asset(
-                                  'assets/images/icon_star.png',
-                                  width: 20,
-                                  color: const Color(0xff989BA1),
-                                ),
-                              ],
+                              children: [1, 2, 3, 4, 5].map(
+                                (index) {
+                                  return Container(
+                                    margin: const EdgeInsets.only(
+                                      left: 2,
+                                    ),
+                                    child: RatingItem(
+                                      index: index,
+                                      rating: space.rating!,
+                                    ),
+                                  );
+                                },
+                              ).toList(),
                             ),
                           ],
                         ),
